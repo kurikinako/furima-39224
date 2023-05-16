@@ -2,18 +2,23 @@
 
 ## users テーブル
 
-| Column              | Type    | Options     |
-| ------------------  | ------- | ----------- |
-| nickname            | string  | null: false |
-| email               | string  | null: false |
-| encrypted_password  | string  | null: false |
-| last_name           | string  | null: false |
-| first_name          | string  | null: false |
-| last_name_kana      | string  | null: false |
-| first_name_kana     | string  | null: false |
-| birth_day_yy        | integer | null: false |
-| birth_day_mm        | integer | null: false |
-| birth_day_dd        | integer | null: false |
+| Column              | Type    | Options                   |
+| ------------------  | ------- | ------------------------- |
+| nickname            | string  | null: false               |
+| email               | string  | null: false, unique: true |
+| encrypted_password  | string  | null: false               |
+| last_name           | string  | null: false               |
+| first_name          | string  | null: false               |
+| last_name_kana      | string  | null: false               |
+| first_name_kana     | string  | null: false               |
+| birth_day           | date    | null: false               |
+
+### Association
+- has_many :items
+- has_many :comments
+- has_one :buys
+- has_one :address
+
 
 ## items テーブル
 
@@ -21,13 +26,18 @@
 | ------------ | ---------- | ------------------------------ |
 | title        | string     | null: false                    |
 | version      | text       | null: false                    |
-| category     | string     | null: false                    |
-| condition    | string     | null: false                    |
-| postage      | integer    | null: false                    |
-| sender       | string     | null: false                    |
-| ship_date    | integer    | null: false                    |
+| category_id  | integer    | null: false                    |
+| condition_id | integer    | null: false                    |
+| postage_id   | integer    | null: false                    |
+| sender_id    | integer    | null: false                    |
+| ship_date_id | integer    | null: false                    |
 | price        | integer    | null: false                    |
 | user         | references | null: false, foreign_key:true  |
+
+### Association
+- belongs_to :user
+- has_many :comments
+
 
 ## comments テーブル
 
@@ -37,24 +47,34 @@
 | user         | references | null: false, foreign_key:true  |
 | item         | references | null: false, foreign_key:true  |
 
-## credit_cards テーブル
+### Association
+- belongs_to :user
+- belongs_to :item
+
+
+## buys テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| card_number      | integer    | null: false                    |
-| expiration_date  | integer    | null: false                    |
-| security_code    | integer    | null: false                    |
 | user             | references | null: false, foreign_key:true  |
+| item             | references | null: false, foreign_key:true  |
+
+### Association
+- belongs_to :user 
+
 
 ## address テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
 | sipping_address  | string     | null: false                    |
-| post_code        | integer    | null: false                    |
-| prefectures      | string     | null: false                    |
+| post_code        | string     | null: false                    |
+| prefectures_id   | integer    | null: false                    |
 | city             | string     | null: false                    |
 | add_number       | integer    | null: false                    |
-| building_name    | string     | null: false                    |
-| tel_number       | integer    | null: false                    |
+| building_name    | string     |                                |
+| tel_number       | string     | null: false                    |
 | user             | references | null: false, foreign_key:true  |
+
+### Association
+- belongs_to :user
