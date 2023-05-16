@@ -16,7 +16,7 @@
 ### Association
 - has_many :items
 - has_many :comments
-- has_one :buys
+- has_many :buys
 - has_one :address
 
 
@@ -61,6 +61,8 @@
 
 ### Association
 - belongs_to :user 
+- belongs_to :item
+- has_one :address
 
 
 ## address テーブル
@@ -69,12 +71,14 @@
 | ---------------- | ---------- | ------------------------------ |
 | sipping_address  | string     | null: false                    |
 | post_code        | string     | null: false                    |
-| prefectures_id   | integer    | null: false                    |
+| sender_id        | integer    | null: false                    |
 | city             | string     | null: false                    |
-| add_number       | integer    | null: false                    |
+| add_number       | string     | null: false                    |
 | building_name    | string     |                                |
 | tel_number       | string     | null: false                    |
 | user             | references | null: false, foreign_key:true  |
+| buy              | references | null: false, foreign_key:true  |
 
 ### Association
 - belongs_to :user
+- belongs_to :buys
