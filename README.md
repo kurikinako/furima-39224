@@ -36,7 +36,7 @@
 ### Association
 - belongs_to :user
 - has_many :comments
-- has_one :buys
+- has_one :buy
 
 
 ## comments テーブル
@@ -65,11 +65,10 @@
 - has_one :address
 
 
-## address テーブル
+## addresses テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| sipping_address  | string     | null: false                    |
 | post_code        | string     | null: false                    |
 | sender_id        | integer    | null: false                    |
 | city             | string     | null: false                    |
