@@ -1,14 +1,21 @@
 class Item < ApplicationRecord
-
+  has_one_attached :image
   belongs_to :user
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :postage
+  belongs_to :sender
+  belongs_to :ship_date
 
-  validates :title, presence: true
-  validatest :version, presence: true
-  validatest :category_id, presence: true
-  validatest :condition_id, presence: true
-  validatest :postage_id, presence: true
-  validatest :sender_id, presence: true
-  validatest :ship_date_id, presence: true
-  validatest :price, presence: true
+
+  validates :image, :title, :version, presence: true
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+  validates :price, format: { with: /\A[0-9]+\z/ }
+  validates :category_id, numericality: { other_than: 1 }
+  validates :condition_id, numericality: { other_than: 1 }
+  validates :postage_id, numericality: { other_than: 1 }
+  validates :sender_id, numericality: { other_than: 1 }
+  validates :ship_date_id, numericality: { other_than: 1 }
 
 end
