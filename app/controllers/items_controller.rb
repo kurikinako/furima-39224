@@ -47,9 +47,9 @@ class ItemsController < ApplicationController
   end
 
   def require_login
-    unless user_signed_in?
-      redirect_to new_user_session_path
-    end
+    return if user_signed_in?
+
+    redirect_to new_user_session_path
   end
 
   def set_item
