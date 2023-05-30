@@ -12,4 +12,5 @@ class User < ApplicationRecord
   validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,}\z/ }
 
   has_many :items
+  has_many :orders
 end
