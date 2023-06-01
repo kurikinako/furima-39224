@@ -11,6 +11,6 @@ class User < ApplicationRecord
   end
   validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,}\z/ }, allow_blank: true
 
-  has_many :items
-  has_many :orders
+  has_many :items, dependent: :destroy
+  has_many :orders, dependent: :destroy
 end
