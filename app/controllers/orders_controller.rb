@@ -4,8 +4,10 @@ class OrdersController < ApplicationController
 
   def index
     @order_address = OrderAddress.new
-    if !user_signed_in? || @item.user == current_user
+    if !user_signed_in? && @item.user == current_user
       redirect_to root_path
+    else
+      redirect_to new_user_session_path
     end
   end
 
